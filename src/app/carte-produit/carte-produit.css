@@ -1,0 +1,11 @@
+.carte {     border: 1px solid #ddd;
+         border-radius: 8px;  
+            padding: 16px; 
+                width: 260px; 
+                    font-family: system-ui, sans-serif; 
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);  
+                     } 
+.carte h3 { margin: 0 0 8px 0; color: #1976d2; }
+.desc     { font-size: 0.9rem; color: #666; } 
+.prix     { font-size: 1.3rem; font-weight: bold; color: #2e7d32; } 
+.stock    { font-size: 0.85rem; color: #888; } 

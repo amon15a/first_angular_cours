@@ -1,0 +1,39 @@
+ h1 {     color: #1976d2;
+       font-family: system-ui, sans-serif;
+            border-bottom: 3px solid #1976d2;  
+               padding-bottom: 8px;   
+              }       
+ p {     font-family: system-ui, sans-serif;
+       color: #444;   
+      } 
+.catalogue {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 16px;
+ font-family: system-ui, sans-serif;
+ }
+
+ .produit {
+ border: 1px solid #ddd;
+ border-radius: 8px;
+ padding: 14px;
+ width: 240px;
+ }
+
+ .produit h3 { margin: 0 0 6px 0; color: #1976d2; font-size: 1rem; }
+  .epuise { opacity: 0.5; border-color: #c62828; }
+ .promo { border-left: 5px solid #f9a825; }
+ .panier { font-weight: bold; color: #2e7d32; }
+ .panier.vide { color: #888; font-weight: normal; }
+ badge {
+ display: inline-block;
+ padding: 3px 8px;
+ border-radius: 4px;
+ font-size: 0.75rem;
+ font-weight: bold;
+ }
+
+ .rupture { background: #ffebee; color: #c62828; }
+ .faible { background: #fff8e1; color: #f57f17; }
+ .dispo { background: #e8f5e9; color: #2e7d32; }
+ .cat { font-size: 0.8rem; color: #777; font-style: italic; }
