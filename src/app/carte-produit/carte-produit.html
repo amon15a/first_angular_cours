@@ -1,6 +1,18 @@
-  <div class="carte">  
-       <h3>{{ nom }}</h3> 
-           <p class="desc">{{ description }}</p>  
-              <p class="prix">{{ prix }} DT</p>  
-                 <p class="stock">Stock : {{ stock }} unites</p>  
-     </div> 
+ <!-- ATTENTION : partout produit() AVEC parenthèses, jamais produit -->
+     <!-- Les parenthèses lisent la valeur de l'entrée. Sans elles : erreur. -->   
+        -  <div class="produit" [class.epuise]="produit().stock === 0"   
+             [class.promo]="produit().promotion">   
+ <!-- le pipe uppercase exige UpperCasePipe dans imports --> 
+      <h3>{{ produit().nom | uppercase }}</h3>  
+             <p>{{ produit().description }}</p>   
+      <!-- le pipe number exige DecimalPipe dans imports -->
+    <p>{{ produit().prix | number:'1.2-2' }} DT</p>     
+   <!-- INCHANGE : les trois badges du TP 2, avec produit() en plus -->  
+      @if (produit().stock === 0)
+       {       <span class="badge rupture">Rupture de stock</span>     }
+        @else if (produit().stock < 5)
+         {       <span class="badge faible">Plus que {{ produit().stock }} en stock</span>     } 
+         @else {       <span class="badge dispo">En stock</span>     } 
+                 <!-- le clic sera branche a l etape 2, laissez le bouton inerte --> 
+           <button [disabled]="produit().stock === 0"(click)="signalerAjout()">Ajouter au panier</button>
+            </div> 

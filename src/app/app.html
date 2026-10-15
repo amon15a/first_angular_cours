@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body>
+<body><app-entete-boutique></app-entete-boutique>
+
   <h1>Bienvenue sur {{ nomBoutique }}</h1> 
     <p>Boutique situee a {{ ville }}.</p>  
      <p>Nous proposons {{ nombreProduits }} produits.</p>  
@@ -21,66 +22,32 @@
         <p>{{ ouvert ? 'Ouvert' : 'Ferme' }}</p> 
         
         <p>{{ nomBoutique + ' - ' + ville }}</p> 
-        <app-carte-produit ></app-carte-produit>
 <h2>Notre catalogue</h2>
+<input  type="number" [(ngModel)]="maxx" placeholder="Prix maximum">
+   <div class="catalogue">
+      <!-- MODIFIE : la variable de boucle s’appelle p, plus produit.          C’est pour éviter la confusion avec l’entrée nommée produit. --> 
+           @for (p of produitsFiltres(); track p.id) 
+           {     
+               <app-carte-produit [produit]="p"(ajout)="ajouterAuPanier($event)"></app-carte-produit>         }
+                @empty {
+                  <p>Aucun produit ne correspond a votre recherche.</p>     }
 
- <div class="catalogue">
- @for (produit of produitsFiltres(); track produit.id) {
-<div class="produit"
- [class.epuise]="produit.stock === 0"
- [class.promo]="produit.promotion">
-
-
- <h3> {{ produit.nom | lowercase | titlecase }}</h3>
-  @switch (produit.categorie) {
- @case ('alimentaire') {
- <span class="cat">Produit du terroir</span>
- }
- @case ('artisanat') {
- <span class="cat">Artisanat local</span>
- }
- @default {
- <span class="cat">Divers</span>
- }
-}
- <p> {{ produit.description | slice:0:20 }}...
-</p>
- <p>  {{ produit.prix | currency:'TND':'symbol':'1.3-3' }}
-</p>
-@if (produit.stock === 0) {
- <span class="badge rupture">Rupture de stock</span>
- } @else if (produit.stock < 5) {
- <span class="badge faible">Plus que {{ produit.stock }} en stock</span>
- } @else {
- <span class="badge dispo">En stock</span>
- }
-<button [disabled]="produit.stock === 0"
- (click)="ajouterAuPanier(produit)">
- Ajouter au panier</button>
- </div>
- }
- </div>
+                   </div> 
+ <button [disabled]="panier.length==0" (click)="viderPanier()">
+ Vider le panier</button>
+ <button  (click)="trie()" >
+ trie  la catalogue</button>
  <input type="text"
  placeholder="Rechercher un produit"
  [(ngModel)]="recherche">
-
- <p>Recherche en cours : {{ recherche }}</p>
+  <p>Recherche en cours : {{ recherche }}</p>
  @if (panier.length > 0) {
  <p class="panier">{{ panier.length }} article(s) dans le panier</p>
  } @else {
  <p class="panier vide">Votre panier est vide.</p>
  }
- <button [disabled]="produit.stock === 0"
- (click)="vider le panier()">
- Vider le panier</button>
- <p>Catalogue au {{ dateDuJour | date:'dd MMMM yyyy' }}</p>
- <p>Mis a jour a {{ dateDuJour | date:'HH:mm' }}</p>
 
 
-
-
-       
-<app-entete-boutique></app-entete-boutique>
 <app-pied-page></app-pied-page>
 
       </body>

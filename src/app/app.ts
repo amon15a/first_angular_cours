@@ -4,22 +4,14 @@ import { EnteteBoutique } from './entete-boutique/entete-boutique';
 import { PiedPage } from './pied-page/pied-page';
 import { Produit } from './produit/produit';
 import { FormsModule } from '@angular/forms';
-import{LowerCasePipe, SlicePipe,TitleCasePipe, UpperCasePipe,DecimalPipe, CurrencyPipe,DatePipe} from '@angular/common';
 
 
-type Product = {
-  name: string;
-  category: string;
-  price: string;
-  accent: string;
-  badge?: string;
-};
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [CarteProduit, EnteteBoutique, PiedPage,FormsModule,UpperCasePipe,LowerCasePipe,TitleCasePipe,SlicePipe,DecimalPipe,CurrencyPipe,DatePipe], 
+  imports: [CarteProduit, EnteteBoutique, PiedPage,FormsModule], 
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
@@ -46,17 +38,36 @@ export class App {
  ];
   panier: Produit[] = [];
 
+
  ajouterAuPanier(produit: Produit): void {
  this.panier.push(produit);
  console.log(this.panier.length + ' article(s) dans le panier');
  }
- produitsFiltres(): Produit[] {
- const terme = this.recherche.toLowerCase().trim();
- if (terme === '') {
- return this.produits;
+maxx: number = 1000;
+
+produitsFiltres(): Produit[] {
+  const terme = this.recherche.toLowerCase().trim();
+  return this.produits.filter(p =>
+    p.prix <= this.maxx && p.nom.toLowerCase().includes(terme)
+  );
+}
+ viderPanier(): void {
+ this.panier = [];
+ console.log('Panier vidé');
  }
- return this.produits.filter(p => p.nom.toLowerCase().includes(terme));
- }
+totalpanier():number{
+  let total=0;
+  for(const p of this.panier){
+    total=total+ p.prix;
+
+  }
+  return total;
+}
+trie(): void {
+  this.produits.sort((a, b) => a.prix - b.prix);
+  console.log('Catalogue trié par prix croissant');}
+
 
 
 }
+
