@@ -12,4 +12,5 @@
                                 ajout = output<Produit>(); 
                                  signalerAjout(): void {
                                               this.ajout.emit(this.produit()); 
-                                          } }
+                                          }
+                                        detail= output<Produit>();afficherStock = input(true); }

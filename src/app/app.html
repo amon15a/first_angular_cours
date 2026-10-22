@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body><app-entete-boutique></app-entete-boutique>
+<app-resume-panier></app-resume-panier>
+<app-entete-boutique></app-entete-boutique>
 
   <h1>Bienvenue sur {{ nomBoutique }}</h1> 
     <p>Boutique situee a {{ ville }}.</p>  
-     <p>Nous proposons {{ nombreProduits }} produits.</p>  
-      <p>TP realise par : {{ etudiant }}</p> 
+<p>Nous proposons {{ produits.length }} produits.</p>   
+   <p>TP realise par : {{ etudiant }}</p> 
       
         <p>{{ 2 + 3 }}</p> 
         
         <p>{{ nomBoutique.toUpperCase() }}</p>
         
         
-        <p>{{ nombreProduits * 2 }}</p>
-        
+<p>Nous proposons {{ produits.length }} produits.</p>        
         <p>{{ ouvert ? 'Ouvert' : 'Ferme' }}</p> 
         
         <p>{{ nomBoutique + ' - ' + ville }}</p> 
@@ -28,27 +21,35 @@
       <!-- MODIFIE : la variable de boucle s’appelle p, plus produit.          C’est pour éviter la confusion avec l’entrée nommée produit. --> 
            @for (p of produitsFiltres(); track p.id) 
            {     
-               <app-carte-produit [produit]="p"(ajout)="ajouterAuPanier($event)"></app-carte-produit>         }
-                @empty {
+<app-carte-produit [produit]="p"
+  (ajout)="ajouterAuPanier($event)"
+  (detail)="afficherDetail($event)"> 
+  </app-carte-produit>     
+           }@empty {
                   <p>Aucun produit ne correspond a votre recherche.</p>     }
 
                    </div> 
- <button [disabled]="panier.length==0" (click)="viderPanier()">
- Vider le panier</button>
+  <button (click)="basculerTest()">
+  {{ afficherTest ? 'Masquer' : 'Afficher' }} le composant de test
+</button>
+
+@if (afficherTest) {
+  <app-composant-test></app-composant-test>
+}
+                   <p>Produits artisanat : {{ nombreArtisanat() }}</p>
+  @if (produitSelectionne) {
+  <p>Produit sélectionné : {{ produitSelectionne.nom }}</p>
+}
+@if (panier.nombreArticles() > 0) {
+  <button (click)="viderPanier()">Vider le panier</button>
+}
  <button  (click)="trie()" >
  trie  la catalogue</button>
  <input type="text"
  placeholder="Rechercher un produit"
  [(ngModel)]="recherche">
   <p>Recherche en cours : {{ recherche }}</p>
- @if (panier.length > 0) {
- <p class="panier">{{ panier.length }} article(s) dans le panier</p>
- } @else {
- <p class="panier vide">Votre panier est vide.</p>
- }
 
 
 <app-pied-page></app-pied-page>
 
-      </body>
-</html>

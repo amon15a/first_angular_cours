@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,inject } from '@angular/core';
+import{Panier} from '../panier';
 
 @Component({
   imports: [],
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: './pied-page.html',
 })
 export class PiedPage {
+   panier = inject(Panier); 
      links: string[] = [
         'A propos',
         'Contact',

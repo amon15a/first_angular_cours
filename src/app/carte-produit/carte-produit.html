@@ -3,13 +3,13 @@
         -  <div class="produit" [class.epuise]="produit().stock === 0"   
              [class.promo]="produit().promotion">   
  <!-- le pipe uppercase exige UpperCasePipe dans imports --> 
-      <h3>{{ produit().nom | uppercase }}</h3>  
-             <p>{{ produit().description }}</p>   
+<h3 class="nom" (click)="detail.emit(produit())">{{ produit().nom }}</h3>             <p>{{ produit().description }}</p>   
       <!-- le pipe number exige DecimalPipe dans imports -->
     <p>{{ produit().prix | number:'1.2-2' }} DT</p>     
    <!-- INCHANGE : les trois badges du TP 2, avec produit() en plus -->  
-      @if (produit().stock === 0)
-       {       <span class="badge rupture">Rupture de stock</span>     }
+     @if (afficherStock()) {
+  <span class="stock">Stock : {{ produit().stock }}</span>
+}
         @else if (produit().stock < 5)
          {       <span class="badge faible">Plus que {{ produit().stock }} en stock</span>     } 
          @else {       <span class="badge dispo">En stock</span>     } 
